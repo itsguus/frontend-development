@@ -73,7 +73,7 @@ header nav.mobile > ul > li a {margin: 1rem 0 0.2rem 1rem;}
 header nav.mobile > ul > li:last-of-type {margin-bottom: 1rem;}
 header nav.mobile > ul ul {display: flex; flex-direction: column; margin-left: 2rem;}
 header nav.mobile > ul ul li a {font-size: 0.9rem; margin: 0; padding: 0.5rem 0 0.2rem; }
-
+ 
 header nav.mobile input {z-index: 3; position: fixed; width: 2rem; height: 2rem; opacity: 0; right: 1.3rem; top: 1.3rem;}
 header nav.mobile input:checked ~ ul {transform: translateY(0%); z-index: -1; opacity: 1; visibility: visible;}
 
