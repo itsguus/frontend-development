@@ -1,3 +1,2 @@
-# fedjekyll
-
-Live op https://itsguus.github.io/frontend-development/ 
+# Frontend Development
+Live op https://serene-austin-b68832.netlify.app/
