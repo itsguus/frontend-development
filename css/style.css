@@ -118,10 +118,10 @@ header nav.mobile { position: absolute; top: 0; display: none;}
 .home section.categories h2 {margin-right: 15rem; text-transform: uppercase; color: #F5D0C4; text-shadow: 0 2px 4px rgba(0,0,0,0.50); margin-bottom: 0;}
 
 /* BACKGROUND IMAGES */
-.home section.categories article:nth-of-type(1) {background: url('/uploads/shirts.jpg') center center / cover; }
-.home section.categories article:nth-of-type(2) {background: url('/img/banner2.jpg') center center / cover; }
-.home section.categories article:nth-of-type(3) {background: url('/uploads/panner.jpg') center center / cover; }
-.home section.categories article:nth-of-type(4) {background: url('/uploads/2-1.jpg') center center / cover; }
+.home section.categories article:nth-of-type(1) {background: url('../uploads/shirts.jpg') center center / cover; }
+.home section.categories article:nth-of-type(2) {background: url('../img/banner2.jpg') center center / cover; }
+.home section.categories article:nth-of-type(3) {background: url('../uploads/panner.jpg') center center / cover; }
+.home section.categories article:nth-of-type(4) {background: url('../uploads/2-1.jpg') center center / cover; }
 
 .home section.cta { display: flex; align-items: center; justify-content: center; margin: 5rem auto;}
 
@@ -131,7 +131,7 @@ header nav.mobile { position: absolute; top: 0; display: none;}
 /* BOUTIQUE BUTTON SVG   */
 figure.buttonbox {position:relative; width:20em; height:20rem; display: flex; justify-content: center; align-items: center; }
 figure.buttonbox figcaption {text-transform: uppercase; font-family: "Conv_BrownStd-BoldAlt"; font-size: 1.2rem; text-align: center; max-width: 10rem; margin-bottom: 0; color: #F5D0C4}
-figure.buttonbox figure.button { position: absolute; width:100%; height: 100%; top:0; left: 0; background:#F5D0C4;  mask-image: url("/img/button.svg"); -webkit-mask-image: url("/img/button.svg")}
+figure.buttonbox figure.button { position: absolute; width:100%; height: 100%; top:0; left: 0; background:#F5D0C4;  mask-image: url("../img/button.svg"); -webkit-mask-image: url("../img/button.svg");}
 figure.buttonbox:hover figcaption {color: #0C0C18;}
 figure.buttonbox:hover figure.button {background-color: #0C0C18;}
 
@@ -151,7 +151,7 @@ footer::after {content: ""; width: 100vw; height: 5px; border-top: 3px solid #F5
 
 /* WEBSHOP */
 
-.webshop .coverimage { display: block; position: relative; padding-bottom: 40%;  background: url('/uploads/dsc-4403.jpg') center center / cover; }
+.webshop .coverimage { display: block; position: relative; padding-bottom: 40%;  background: url('../uploads/dsc-4403.jpg') center center / cover; }
 
 .webshop section.content {margin: 3rem auto;}
 .webshop section.content h1 {text-transform: uppercase;}
