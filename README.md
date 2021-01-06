@@ -18,8 +18,6 @@ Deze opdracht is mij erg goed afgegaan. De 2 pagina's die ik moest maken waren n
 
 Ik ben vooral blij geweest met de feedback van Deanna over het  gebruiken van divs. Naarmate ik meer websites bouw ben ik me daar sowieso al bewuster van geworden. Soms ben ik dan nog wel eens lui en zet ik een div neer, maar ik vond het leuk om voor deze opdracht dusdanig te spelen met HTML tags en pseudo-elementen dat je volledig van de 'diveritus' af kwam. 
 
-Screenshot(s):
-
 **Screenshot(s):**
 
 De screenshots zijn hetzelfde als bij Voortgang 1. Aan de voorkant van de website is niks veranderd. Je kan in een branch bekijken hoe de code er bij poging 1 uitzag vergeleken met het eindresultaat. 
