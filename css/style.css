@@ -15,17 +15,16 @@ h2 {font-size: 2rem; line-height: 1; font-family: 'Conv_BrownStd-BoldAlt'; font-
 
 
 /* GENERAL STUFF */
-section.mw { max-width: 75rem; margin: 0 auto; padding: 0 2rem;}
+section {position: relative;}
+section.mw { max-width: 75rem; margin: 0 auto; width: calc(100% - 2rem);}
 
-.canvasoverlay {position: absolute; top: 0; left: 0; background: url(/img/paper.png); opacity: 0.15; background-size: 20rem; width: 100%; height:100%; margin:0 !important; pointer-events: none;}
+.canvasoverlay::before {display:block; content: ""; position: absolute; top: 0; left: 0; background: url(/img/paper.png); opacity: 0.15; background-size: 20rem; width: 100%; height:100%; margin:0; pointer-events: none;}
 
-.line {width:100vw; height: 3px; background: #F5D0C4; margin-top: 10px; position: relative; z-index: 1;}
-.line.l2 {margin-top: 4px;}
-.line.bottom {margin-top:0; margin-bottom: 4px;}
-.line.l2.bottom {margin-top:0; margin-bottom: 10px;}
+.lines-bottom::after {content: ""; width: 100vw; height: 5px; border-top: 3px solid #F5D0C4; border-bottom: 3px solid #F5D0C4; position: absolute; bottom: -18px; }
+.lines-top::before {content: ""; width: 100vw; height: 5px; border-top: 3px solid #F5D0C4; border-bottom: 3px solid #F5D0C4; position: absolute; top: -18px; }
 
-.displayNone {display:none !important;}
-
+fieldset legend { display: none; }
+.displayNone { display: none; }
 
 /* BACK TO TOP */
 #backtotop {position: fixed;transition: 300ms ease; border-bottom: 0.15rem solid transparent; opacity: 0; visibility: hidden; bottom: 5rem; z-index: 10; right: -1.5rem; color: #F5D0C4; font-family: "Conv_BrownStd-BoldAlt";  text-transform: uppercase;  transform: rotate(-90deg);}
@@ -51,7 +50,7 @@ header nav.desktop ul:nth-of-type(2) {position: relative; left: calc(50% + 10rem
 
 header #homeimg {width: 7.5rem; height:auto; position: absolute; top:2px; left: -5px; z-index: 5;}
 header a.meid {position: absolute; left:0; right: 0; margin-left: auto; margin-right: auto; top:0.4rem; width: 6.5rem; height:6.5rem; background: #0C0C18; border-radius: 50%;}
-header a.meid  > .canvasoverlay {border-radius: 50%;}
+header a.meid.canvasoverlay::before {border-radius: 50%;}
 
 .home header a.meid {transform: translateY(-7rem); transition: 500ms ease;}
 .home header a.meid.show {transform: none;}
@@ -73,11 +72,12 @@ header nav.mobile > ul > li a {margin: 1rem 0 0.2rem 1rem;}
 header nav.mobile > ul > li:last-of-type {margin-bottom: 1rem;}
 header nav.mobile > ul ul {display: flex; flex-direction: column; margin-left: 2rem;}
 header nav.mobile > ul ul li a {font-size: 0.9rem; margin: 0; padding: 0.5rem 0 0.2rem; }
- 
+
+header nav.mobile label {display: none;}
 header nav.mobile input {z-index: 3; position: fixed; width: 2rem; height: 2rem; opacity: 0; right: 1.3rem; top: 1.3rem;}
 header nav.mobile input:checked ~ ul {transform: translateY(0%); z-index: -1; opacity: 1; visibility: visible;}
 
-header nav.mobile .hamburger { position: fixed; right: 1.6rem; top: 1.6rem; height: 1.5rem; width: 1.5rem; transition: 500ms ease;}
+header nav.mobile .hamburger { position: fixed; right: 1.6rem; top: 1.6rem; height: 1.5rem; width: 1.4rem; transition: 500ms ease;}
 header nav.mobile .hamburger span {width: 100%; height: 0.16rem; background: #F5D0C4; display: block; position: absolute; transition: 500ms ease; border-radius: 5px;}
 header nav.mobile .hamburger span:nth-of-type(1) {top: 10%;}
 header nav.mobile .hamburger span:nth-of-type(2) { top: 43%; }
@@ -87,7 +87,7 @@ header nav.mobile input:checked ~ .hamburger {transform: rotate(270deg) translat
 header nav.mobile input:checked ~ .hamburger span { width: 100%;}
 header nav.mobile input:checked ~ .hamburger span:nth-of-type(1) {top: 10%; transform: rotate(45deg);  transform-origin: top left;}
 header nav.mobile input:checked ~ .hamburger span:nth-of-type(2) { opacity: 0;}
-header nav.mobile input:checked ~ .hamburger span:nth-of-type(3) {top: 80%;  transform-origin: bottom left; transform: rotate(-45deg);}
+header nav.mobile input:checked ~ .hamburger span:nth-of-type(3) {top: 75%;  transform-origin: bottom left; transform: rotate(-45deg);}
 
 header nav.mobile { position: absolute; top: 0; display: none;}
 
@@ -95,7 +95,7 @@ header nav.mobile { position: absolute; top: 0; display: none;}
 
 
 /* BREADCRUMBS */
-#breadcrumbs { color: #0C0C18; font-size: 1rem;  border-radius: 0.2rem;  line-height: 1.2; margin: 1rem 0 0 1rem;}
+#breadcrumbs { color: #0C0C18; font-size: 1rem;  border-radius: 0.2rem;  line-height: 1.2; margin: 2rem 0 5rem 1rem;}
 #breadcrumbs a {color: #0C0C18; text-decoration: none;}
 #breadcrumbs a:hover {border-bottom: 0.07rem solid #0C0C18; }
 #breadcrumbs .lastitem:nth-child(3) {display: none;}
@@ -104,88 +104,93 @@ header nav.mobile { position: absolute; top: 0; display: none;}
 
 /* HOME */
 .home section.fullscreen {position: relative; height: calc(100vh - 8.4rem); width:100%; margin-top:4.8rem; align-items: center; display:flex; justify-content: center; background: #0C0C18}
-.home section.fullscreen  > div {margin-left:1.5rem;}
-.home section.fullscreen  > div > img {width:35rem; display:block; margin-bottom: 2rem;}
+.home section.fullscreen  > img {max-width:35rem; width: calc(100% - 2rem); display:block; margin: 0 0 2rem 0rem; }
 
-.home section.intro {background: #FFF;}
+.home section.intro {display: flex; align-items: center; gap: 4rem;}
 .home section.intro h1 {text-transform: uppercase;}
-.home section.intro .container {display: flex; margin: 10rem auto; align-items: center; justify-content: space-between;}
-.home section.intro .container > div {width:60%;}
+.home section.intro article {display: flex; flex-direction: column; margin: 10rem auto; justify-content: space-between;}
 
-.home section.categories .image {position: relative; width:100%; padding-bottom:35%; margin: 3rem auto}
-.home section.categories .image:first-of-type {margin-top: 0;}
-.home section.categories .image:last-of-type {margin-bottom: 0;}
-.home section.categories > div a{position: absolute; width:100%; height:100%; top:0; left: 0; display: flex; align-items: center; justify-content: flex-end;}
-.home section.categories > div a:hover h2 {border-bottom: 0.15rem solid #F5D0C4; margin-bottom:-2px;}
+.home section.categories article {position: relative; width:100%; padding-bottom:35%; margin: 3rem auto}
+.home section.categories article:first-of-type {margin-top: 0;}
+.home section.categories article:last-of-type {margin-bottom: 0;}
+.home section.categories > article a{position: absolute; width:100%; height:100%; top:0; left: 0; display: flex; align-items: center; justify-content: flex-end;}
+.home section.categories > article a:hover h2 {border-bottom: 0.15rem solid #F5D0C4; margin-bottom:-2px;}
 .home section.categories h2 {margin-right: 15rem; text-transform: uppercase; color: #F5D0C4; text-shadow: 0 2px 4px rgba(0,0,0,0.50); margin-bottom: 0;}
 
-.home section.cta { display: flex; align-items: center; justify-content: center; margin:3rem auto;}
+/* BACKGROUND IMAGES */
+.home section.categories article:nth-of-type(1) {background: url('/uploads/shirts.jpg') center center / cover; }
+.home section.categories article:nth-of-type(2) {background: url('/img/banner2.jpg') center center / cover; }
+.home section.categories article:nth-of-type(3) {background: url('/uploads/panner.jpg') center center / cover; }
+.home section.categories article:nth-of-type(4) {background: url('/uploads/2-1.jpg') center center / cover; }
+
+.home section.cta { display: flex; align-items: center; justify-content: center; margin: 5rem auto;}
 
 
 
 
 /* BOUTIQUE BUTTON SVG   */
-.buttonbox {position:relative; width:20em; height:20rem; display: flex; justify-content: center; align-items: center; }
-.buttonbox p {text-transform: uppercase; font-family: "Conv_BrownStd-BoldAlt"; font-size: 1.2rem; text-align: center; max-width: 10rem; margin-bottom: 0; color: #F5D0C4}
-.button { position: absolute; width:100%; height: 100%; top:0; left: 0; background:#F5D0C4;  mask-image: url("/img/button.svg"); -webkit-mask-image: url("/img/button.svg")}
-.buttonbox:hover p {color: #0C0C18;}
-.buttonbox:hover .button {background-color: #0C0C18;}
+figure.buttonbox {position:relative; width:20em; height:20rem; display: flex; justify-content: center; align-items: center; }
+figure.buttonbox figcaption {text-transform: uppercase; font-family: "Conv_BrownStd-BoldAlt"; font-size: 1.2rem; text-align: center; max-width: 10rem; margin-bottom: 0; color: #F5D0C4}
+figure.buttonbox figure.button { position: absolute; width:100%; height: 100%; top:0; left: 0; background:#F5D0C4;  mask-image: url("/img/button.svg"); -webkit-mask-image: url("/img/button.svg")}
+figure.buttonbox:hover figcaption {color: #0C0C18;}
+figure.buttonbox:hover figure.button {background-color: #0C0C18;}
 
 
 
 /* FOOTER */
-
 footer {padding: 2rem 0; color: #F5D0C4; font-size: 0.92rem; background: #0C0C18; position: relative;}
-footer div > a { color: #F5D0C4; font-family: "Conv_BrownStd-BoldAlt"; margin-bottom: 0.5rem;}
+footer > nav {max-width: 75rem; margin: 0 auto; width: calc(100% - 2rem); display: flex; justify-content: space-between;}
+footer > nav ul li:first-of-type {margin-bottom: 0.5rem;}
+footer > nav ul li:first-of-type a {color: #F5D0C4; font-weight: bold;}
 footer li > a { color: #FFF; }
-footer div > ul {margin-top: 0.5rem;}
-footer .container {display: flex; justify-content: space-between; position: relative; z-index: 2; padding: 0 2rem;}
-footer ul {display:flex; flex-direction: column;}
-footer .insta {margin-right:2rem;}
+footer ul:last-of-type {margin-right: 2rem;}
+
+/* This lines is basically the class .lines-top::before, but ::before is already in use. */
+footer::after {content: ""; width: 100vw; height: 5px; border-top: 3px solid #F5D0C4; border-bottom: 3px solid #F5D0C4; position: absolute; top: -18px; }
 
 
 /* WEBSHOP */
 
-.webshop .coverimage { padding-bottom: 40%;}
-.webshop .content {margin: 3rem auto;}
-.webshop .content h1 {text-transform: uppercase;}
-.webshop .content .filters {margin: 3rem auto; display:flex; align-items: center;}
-.webshop .content .filters > div {display: flex; align-items: center;}
+.webshop .coverimage { display: block; position: relative; padding-bottom: 40%;  background: url('/uploads/dsc-4403.jpg') center center / cover; }
 
-.webshop .content .filters > div > label {font-size: 1.2rem; font-family: "Conv_BrownStd-BoldAlt"; text-transform: uppercase; margin: 0.2rem 1rem 0 0; letter-spacing: 0.1rem;}
-.webshop .content .filters > div:first-of-type > select {margin-right: 1rem;}
-.webshop .content .filters select::-ms-expand { display: none; }
-.webshop .content .filters select { -webkit-appearance: none; appearance: none;  padding: 0.3rem 0.6rem 0.5rem;  border-radius: 0.2rem;  font-size: 1rem; border: 1px solid #444;; background: white; font-family: 'Didact Gothic'; flex-grow: 1;}
+.webshop section.content {margin: 3rem auto;}
+.webshop section.content h1 {text-transform: uppercase;}
+.webshop section.content > article:first-of-type { max-width: 42rem; }
+
+.webshop section.content .filters {align-items: center; width:100%; margin: 3rem auto; display: flex; align-items: center;}
+.webshop section.content .filters > fieldset {display: flex; align-items: center; border: none; width: 100%;}
+
+.webshop section.content .filters > fieldset > label {font-size: 1.2rem; font-family: "Conv_BrownStd-BoldAlt"; text-transform: uppercase; margin: 0.2rem 1rem 0 0; letter-spacing: 0.1rem;}
+.webshop section.content .filters > fieldset:first-of-type > select {margin-right: 1rem;}
+.webshop section.content .filters select::-ms-expand { display: none; }
+.webshop section.content .filters select { -webkit-appearance: none; appearance: none;  padding: 0.3rem 0.6rem 0.5rem;  border-radius: 0.2rem;  font-size: 1rem; border: 1px solid #444;; background: white; font-family: 'Didact Gothic'; flex-grow: 1;}
 
 #productlist {display: grid; grid-template-columns: repeat(auto-fill,minmax(15rem,1fr)); grid-auto-flow: row dense;  grid-gap: 2rem;  margin: 0; margin-top: 1rem;}
-#productlist li {list-style: none; width: 100%; text-align: center; margin: 0; position: relative; }
-#productlist li.productcard {order: 1;}
+#productlist li {width: 100%; text-align: center; margin: 0; position: relative; }
 
 #productlist li a {text-decoration: none; line-height: 1.3; display: block; position: relative;}
 #productlist li a span {color: #0C0C18; margin-top: 0.5rem;}
-#productlist li a div {margin-bottom: 0.3rem;}
 #productlist li a h2 {margin-bottom: 0; margin-top: 0.7rem; font-size: 1rem;}
+
+#productlist li figure { position: relative; padding-bottom: 110%;}
+#productlist li figure img {position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: 500ms ease;}
+#productlist li figure.hover_active:hover img:nth-of-type(2){opacity: 0;}
+
+#productlist .shadowoverlay::after {content: ""; display: block; background: rgba(0,0,0,0.05); position: absolute; top: 0; width: 100%; height: 100%; z-index: 1;}
+
+
+/* Sfeerfotos */
 #productlist li.moodpicture {position: relative;}
-#productlist li.moodpicture div {width:100%; height:0; padding-bottom: 127%;}
-
-.webshop .filters {width:100%; margin: 1rem auto; display: flex; align-items: center;}
-.webshop .filters > div {width:50%;}
-
-.productimage.lazy {position:absolute; top:0; left: 0; width:100%;}
-.productimage.hover {position:absolute; top:0; left: 0; width:100%; opacity: 0; transition: 500ms ease;}
-#productlist .productimage:hover {opacity: 1;}
-#productlist .productimage:hover ~ .productimage.hover {opacity: 1;}
-#productlist .shadowoverlay {background: rgba(0,0,0,0.05); position: absolute; top: 0; width: 100%; height: 100%; z-index: 1;}
-
-
+#productlist li.moodpicture figure {width:100%; height:0; padding-bottom: 127%;}
 #productlist li.moodpicture.normal {grid-column: auto; grid-row: auto;}
 #productlist li.moodpicture.banner {grid-column: span 2; grid-row: auto;}
-#productlist li.moodpicture.banner .productimage { padding-bottom: 61%; margin: 0;}
+#productlist li.moodpicture.banner figure { padding-bottom: 61%; margin: 0;}
 #productlist li.moodpicture.big_square {grid-column: span 2; grid-row: span 2;}
 
-#productlist li.moodpicture:nth-of-type(1) {order: 5;}
+#productlist li.productcard {order: 1;}
+#productlist li.moodpicture:nth-of-type(1) {order: 7;}
 #productlist li.moodpicture:nth-of-type(2) {order: 11;}
-#productlist li.moodpicture:nth-of-type(3) {order: 13;}
+#productlist li.moodpicture:nth-of-type(3) {order: 14;}
 #productlist li.moodpicture:nth-of-type(4) {order: 17;}
 #productlist li.moodpicture:nth-of-type(5) {order: 20;}
 #productlist li.moodpicture:nth-of-type(6) {order: 25;}
@@ -193,18 +198,12 @@ footer .insta {margin-right:2rem;}
 
 
 
-.productimage {padding-bottom: 120%; background-size: cover; background-repeat: no-repeat; background-position: 50% 50%; display: block; position: relative; z-index: 1;}
-.products .productimage {background-size: contain;}
-.productimage > .overlay {position: absolute; width: 100%; padding-bottom: 120%;}
-
-
-
 /* MEDIA QUERIES */
 
 @media only screen and (max-width: 1000px) {
     /* BOUTIQUE BUTTON */
-    .buttonbox {width:15rem; height: 15rem;}
-    .buttonbox p {font-size: 1rem; max-width: 7rem;}
+    figure.buttonbox {width:15rem; height: 15rem;}
+    figure.buttonbox figcaption {font-size: 1rem; max-width: 7rem;}
 }
     
 @media only screen and (max-width: 800px)  {
@@ -231,22 +230,22 @@ footer .insta {margin-right:2rem;}
 
 @media only screen and (max-width: 700px) {
     /* HOME */
-    .home section.fullscreen  > div > img {width:80%; margin: 0 auto 5rem auto;}
     .home section.fullscreen {height: calc(95vh - 8.4rem);} 
-    .home section.intro .container {margin: 5rem auto; flex-direction: column;}
+    .home section.intro {flex-direction: column;}
     .home section.intro h1 {font-size: 7vw;}
-    .home section.intro .container > div {width:100%;}
-    .home section.intro .container > a {margin-top: 2rem; margin-bottom: -1rem;}
+    .home section.intro article{margin: 5rem 0 0 0;}
+    .home section.intro > a {margin-top: 2rem; margin-bottom: 5rem;}
     .home section.categories h2 {margin: 0 auto; font-size: 7vw}
     
     /* BOUTIQUE BUTTON */
-    .buttonbox {width:10rem; height: 10rem;}
-    .buttonbox p {font-size: 0.8rem; max-width: 5rem;}
+    figure.buttonbox {width:10rem; height: 10rem;}
+    figure.buttonbox figcaption {font-size: 0.8rem; max-width: 5rem;}
 
     /* WEBSHOP */
     .webshop .content .filters {flex-direction: column; align-items: flex-start;}
-    .webshop .filters > div {width:100%; margin: 0.5rem auto;}
-    .webshop .content .filters > div:first-of-type > select {margin-right: 0;}
+    .webshop .filters > fieldset {width:100%; margin: 0.5rem auto;}
+    .webshop section.content .filters > fieldset:first-of-type > select {margin-right: 0rem;}
+
     .webshop .content .filters {margin: 2rem auto; }
     #productlist {grid-template-columns: 1fr 1fr;  grid-gap: 1rem;}
 }
@@ -258,8 +257,8 @@ footer .insta {margin-right:2rem;}
 
 @media only screen and (max-width: 500px)  {
     /* FOOTER */
-    footer .container {display: block;}
-    footer .container > div {margin-top: 1rem;}
+    footer nav { flex-direction: column; }
+    footer nav ul {margin-top: 2rem;}
 }
 
 
